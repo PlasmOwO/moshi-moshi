@@ -2,3 +2,5 @@ boto3
 pyaudio
 asyncio
 websockets
+aiofile
+amazon_transcribe
