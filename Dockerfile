@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 RUN apt-get update 
 #RUN apt-get install portaudio19-dev -y
-RUN apt-get install python3-pyaudio
+RUN apt-get install python3-pyaudio -y
 # copie tout ce qui se trouve en local
 COPY . .
 
