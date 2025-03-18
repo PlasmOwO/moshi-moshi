@@ -1,6 +1,5 @@
-FROM python:3.9.6-slim
+FROM python:3.9-slim
 
-# mise à jour de l'environnement
 RUN apt-get update 
 # copie tout ce qui se trouve en local
 COPY . .
@@ -9,4 +8,4 @@ COPY . .
 RUN pip install -r requirements.txt
 # expose le port
 EXPOSE 80
-CMD [ "python3", "mochi-mochi-modular" ]
+CMD ["python3", "mochi-mochi-modular"]
