@@ -4,3 +4,4 @@ asyncio
 websockets
 aiofile
 amazon_transcribe
+streamlit
