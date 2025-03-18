@@ -1,7 +1,7 @@
 FROM python:3.9-slim
 
 RUN apt-get update 
-RUN apt install portaudio19-dev
+RUN sudo apt install portaudio19-dev
 # copie tout ce qui se trouve en local
 COPY . .
 
