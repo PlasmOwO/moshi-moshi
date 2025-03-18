@@ -12,7 +12,7 @@ class MyEventHandler(TranscriptResultStreamHandler):
 
     def set_stream(self, stream):
         self._output_stream = stream
-        
+
     async def handle_transcript_event(self, transcript_event: TranscriptEvent):
         results = transcript_event.transcript.results
         for result in results:
@@ -98,3 +98,5 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+# ffmpeg pour simuler le micro
