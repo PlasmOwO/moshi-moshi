@@ -6,3 +6,5 @@ Academic project for speech-to-text and translation between Japanese-French.
 - étape 3 : créer l'interface (websocket) qui appelle l'API
 - étape 5 : déployement et CI/CD
 - étape bonus: corriger les doublons dans le terminal
+
+Code pour activer le micro en JS -> Appel function API qui sera exec en python
