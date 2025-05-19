@@ -1,6 +1,6 @@
 from fastapi import FastAPI, WebSocket
 import asyncio, uvicorn
-from translate_transcribe_fr import transcribe_stream  # ta fonction existante
+from translate_transcribe_fr import main # ta fonction existante
 from asyncio import Queue
 
 app = FastAPI()
@@ -27,10 +27,11 @@ async def websocket_speech(websocket: WebSocket):
             await queue.put(None)  # Fin du stream
 
     # On exécute la logique de transcription en parallèle de la réception
-    await asyncio.gather(
-        receive_audio(),
-        transcribe_stream(queue)
-    )
+    # await asyncio.gather(
+    #     receive_audio(),
+    #     transcribe_stream(queue)
+    # )
+    asyncio.run(main())
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=7891)

@@ -6,3 +6,4 @@ aiofile
 amazon_transcribe
 streamlit
 uvicorn
+flask
