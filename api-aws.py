@@ -4,6 +4,9 @@ from amazon_transcribe.client import TranscribeStreamingClient
 from amazon_transcribe.handlers import TranscriptResultStreamHandler
 from amazon_transcribe.model import TranscriptEvent
 import boto3
+import json 
+
+#AWS SERVER RUNNING
 
 app = FastAPI()
 
@@ -25,6 +28,12 @@ class MyEventHandler(TranscriptResultStreamHandler):
             for alt in result.alternatives:
                 original_text = alt.transcript
                 print(f"Transcription (Japonais) : {original_text}")  # Afficher la transcription côté serveur
+
+                # ajout pour avoir les logs dans le client
+                await self.websocket.send_text(json.dumps({
+    "type": "log",
+    "message": f"Transcription: {original_text}, Traduction: {translated_text}"
+})) # fin ajout
 
                 # Traduire le texte en français
                 response = translate_client.translate_text(

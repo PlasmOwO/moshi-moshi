@@ -2,6 +2,26 @@ import asyncio
 import websockets
 import pyaudio
 import wave
+import json
+
+async def receive_logs(websocket):
+    try:
+        async for message in websocket:
+            try:
+                data = json.loads(message)
+                if data.get("type") == "log":
+                    print(f"[LOG SERVEUR] {data.get('message')}")
+                else:
+                    print(f"[AUTRE] {data}")
+            except json.JSONDecodeError:
+                print(f"[TEXTE BRUT] {message}")
+    except websockets.ConnectionClosed:
+        print("Connexion WebSocket fermée.")
+
+async def stream_audio_chunks(queue, websocket):
+    while True:
+        audio_chunk = await queue.get()
+        await websocket.send(audio_chunk)
 
 #LOCAL PC
 async def send_audio():
@@ -45,11 +65,10 @@ async def send_audio():
         stream, pa = start_microphone_stream(queue, loop)
 
         try:
-            while True:
-                # Récupérer un chunk audio depuis la file d'attente
-                audio_chunk = await queue.get()
-                # Envoyer le chunk audio au serveur via WebSocket
-                await websocket.send(audio_chunk)
+            await asyncio.gather(
+                stream_audio_chunks(queue, websocket),
+                receive_logs(websocket)
+            )
 
                 # response = await websocket.recv()
                 # print(f"Résultat reçu du serveur : {response}")
