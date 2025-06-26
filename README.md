@@ -8,3 +8,5 @@ Academic project for speech-to-text and translation between Japanese-French.
 - étape bonus: corriger les doublons dans le terminal
 
 Code pour activer le micro en JS -> Appel function API qui sera exec en python
+
+Update pour update
