@@ -29,11 +29,7 @@ class MyEventHandler(TranscriptResultStreamHandler):
                 original_text = alt.transcript
                 print(f"Transcription (Japonais) : {original_text}")  # Afficher la transcription côté serveur
 
-                # ajout pour avoir les logs dans le client
-                await self.websocket.send_text(json.dumps({
-    "type": "log",
-    "message": f"Transcription: {original_text}, Traduction: {translated_text}"
-})) # fin ajout
+                
 
                 # Traduire le texte en français
                 response = translate_client.translate_text(
@@ -43,6 +39,12 @@ class MyEventHandler(TranscriptResultStreamHandler):
                 )
                 translated_text = response.get("TranslatedText", "")
                 print(f"Traduction (Français) : {translated_text}")  # Afficher la traduction côté serveur
+
+                # ajout pour avoir les logs dans le client
+                await self.websocket.send_text(json.dumps({
+    "type": "log",
+    "message": f"Transcription: {original_text}, Traduction: {translated_text}"
+})) # fin ajout
 
                 # Envoyer la transcription et la traduction au client
                 await self.websocket.send_text(f"Japonais : {original_text}\nFrançais : {translated_text}")
