@@ -1,12 +1,17 @@
 # moshi-moshi
 Academic project for speech-to-text and translation between Japanese-French.
 
-- éape 1 : translate - transcribe Jp vers FR  FAIT
-- étape 2 : Api le modèle ci dessus
-- étape 3 : créer l'interface (websocket) qui appelle l'API
-- étape 5 : déployement et CI/CD
-- étape bonus: corriger les doublons dans le terminal
+Ce projet est réalisé sous AWS :
+Les fichiers principaux sont :
 
-Code pour activer le micro en JS -> Appel function API qui sera exec en python
+* api-aws.py : Serveur fastAPI à lancer sous lightsail, il s'occupe de se connecter a AWS Transcribe et AWS Translate
+* client-mioni2.py : Client permettant d'envoyer une requête websocket au serveur
+* web_moshi2.py : Interface du client qui sert à connecter le micro puis utiliser le client-mioni pour intéragir avec le serveur
+* web_moshi2.js : javascript de la page web
+* index.html : HTML de la page Web
 
-Update pour update
+
+Architecture : Nous utilisons Lightsail pour héberger le code API-AWS.py
+De plus automatiquement, le lightsail effectue un pull de code (similaire à un CI/CD)
+
+Le client doit juste lancer le code  web_moshi2.py et cliquer pour acceter le micro
